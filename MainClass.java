@@ -1,33 +1,11 @@
-import java.util.LinkedList;
-
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Define the input string
-        String input = "level";
+        String input = "madam";
 
-        // Create a LinkedList to store characters
-        LinkedList<Character> list = new LinkedList<>();
-
-        // Add each character to the linked list
-        for (char c : input.toCharArray()) {
-            list.add(c);
-        }
-
-        // Flag to track palindrome state
-        boolean isPalindrome = true;
-
-        // Compare until only one or zero elements remain
-        while (list.size() > 1) {
-            char first = list.removeFirst(); // remove from front
-            char last = list.removeLast();   // remove from rear
-
-            if (first != last) {
-                isPalindrome = false;
-                break;
-            }
-        }
+        // Call recursive function
+        boolean isPalindrome = checkPalindrome(input, 0, input.length() - 1);
 
         // Print result
         if (isPalindrome) {
@@ -35,5 +13,22 @@ public class PalindromeCheckerApp {
         } else {
             System.out.println("The string \"" + input + "\" is NOT a Palindrome.");
         }
+    }
+
+    // Recursive method
+    public static boolean checkPalindrome(String str, int start, int end) {
+
+        // Base condition: if pointers cross or meet
+        if (start >= end) {
+            return true;
+        }
+
+        // If characters do not match
+        if (str.charAt(start) != str.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call (move inward)
+        return checkPalindrome(str, start + 1, end - 1);
     }
 }
