@@ -1,26 +1,33 @@
-import java.util.Stack;
+import java.util.*;
 
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Declare and initialize the input string
-        String input = "noon";
+        // Define the input string
+        String input = "civic";
 
-        // Create a Stack to store characters
+        // Create a Queue (FIFO)
+        Queue<Character> queue = new LinkedList<>();
+
+        // Create a Stack (LIFO)
         Stack<Character> stack = new Stack<>();
 
-        // Push each character into the stack
+        // Insert characters into both queue and stack
         for (char c : input.toCharArray()) {
-            stack.push(c);
+            queue.add(c);   // Enqueue
+            stack.push(c);  // Push
         }
 
-        // Assume palindrome initially
+        // Flag to track palindrome status
         boolean isPalindrome = true;
 
-        // Pop from stack and compare with original string
-        for (char c : input.toCharArray()) {
-            if (c != stack.pop()) {
+        // Compare dequeue (queue) vs pop (stack)
+        while (!queue.isEmpty()) {
+            char fromQueue = queue.remove(); // Dequeue (FIFO)
+            char fromStack = stack.pop();    // Pop (LIFO)
+
+            if (fromQueue != fromStack) {
                 isPalindrome = false;
                 break;
             }
