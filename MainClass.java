@@ -1,35 +1,36 @@
+import java.util.Stack;
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Original string
-        String original = "level";
+        // Declare and initialize the input string
+        String input = "noon";
 
-        // Convert string to char array
-        char[] arr = original.toCharArray();
+        // Create a Stack to store characters
+        Stack<Character> stack = new Stack<>();
 
-        // Two pointers
-        int start = 0;
-        int end = arr.length - 1;
+        // Push each character into the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
 
-        // Boolean flag
+        // Assume palindrome initially
         boolean isPalindrome = true;
 
-        // Compare using while loop
-        while (start < end) {
-            if (arr[start] != arr[end]) {
+        // Pop from stack and compare with original string
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
-        // Output result
+        // Print result
         if (isPalindrome) {
-            System.out.println("The string \"" + original + "\" is a Palindrome.");
+            System.out.println("The string \"" + input + "\" is a Palindrome.");
         } else {
-            System.out.println("The string \"" + original + "\" is NOT a Palindrome.");
+            System.out.println("The string \"" + input + "\" is NOT a Palindrome.");
         }
     }
 }
