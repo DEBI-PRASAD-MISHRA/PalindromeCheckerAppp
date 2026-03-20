@@ -1,31 +1,45 @@
-public class PalindromeCheckerApp {
+// Service class (Encapsulation + Single Responsibility)
+class PalindromeChecker {
 
-    public static void main(String[] args) {
+    // Public method to check palindrome
+    public boolean checkPalindrome(String input) {
 
-        // Input string
-        String input = "A man a plan a canal Panama";
-
-        // Step 1: Normalize string
+        // Normalize input (optional improvement)
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
-        // Step 2: Check palindrome (two-pointer approach)
+        // Two-pointer approach (internal logic)
         int start = 0;
         int end = normalized.length() - 1;
 
-        boolean isPalindrome = true;
-
         while (start < end) {
             if (normalized.charAt(start) != normalized.charAt(end)) {
-                isPalindrome = false;
-                break;
+                return false;
             }
             start++;
             end--;
         }
 
-        // Step 3: Display result
-        if (isPalindrome) {
-            System.out.println("The string \"" + input + "\" is a Palindrome (ignoring case & spaces).");
+        return true;
+    }
+}
+
+
+// Main application class
+public class PalindromeCheckerApp {
+
+    public static void main(String[] args) {
+
+        String input = "Racecar";
+
+        // Create object of service class
+        PalindromeChecker checker = new PalindromeChecker();
+
+        // Call method
+        boolean result = checker.checkPalindrome(input);
+
+        // Display result
+        if (result) {
+            System.out.println("The string \"" + input + "\" is a Palindrome.");
         } else {
             System.out.println("The string \"" + input + "\" is NOT a Palindrome.");
         }
